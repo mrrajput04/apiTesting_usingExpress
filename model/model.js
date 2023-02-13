@@ -9,4 +9,13 @@ async function insert(collectionName, rest) {
   const collection = db.collection(collectionName);
   return await collection.insertOne(rest);
 }
-module.exports = insert;
+
+async function getAllUsers(collectionName, data) {
+  await client.connect();
+  const db = client.db(databaseName);
+  console.log(data);
+  const collection = db.collection(collectionName);
+  return await collection.find(data).toArray();
+}
+
+module.exports = { getAllUsers, insert };

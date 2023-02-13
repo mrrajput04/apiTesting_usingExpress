@@ -1,4 +1,5 @@
 const insert = require("../model/model");
+const { getAllUsers } = require("../model/model");
 
 exports.user = async (req, res) => {
   try {
@@ -15,6 +16,22 @@ exports.userData = async (req, res) => {
     return res
       .status(200)
       .json({ status: "data saved in userProfile collection", data: resp });
+  } catch (e) {
+    console.log(e, "---error");
+    res.status(500).json({ error: true, details: e.toString() });
+  }
+};
+
+exports.userAge = async (req, res) => {
+  try {
+    let resp = await getAllUsers("userProfile", req.body);
+    // let arr = [];
+    // arr.push(resp[0].dob)
+    // console.log(arr);
+    return res
+      .status(200)
+      .json({ status: "data fetch from userProfile collection", data: resp });
+    
   } catch (e) {
     console.log(e, "---error");
     res.status(500).json({ error: true, details: e.toString() });
