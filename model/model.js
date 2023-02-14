@@ -10,7 +10,7 @@ async function insert(collectionName, rest) {
   return await collection.insertOne(rest);
 }
 
-async function getAllUsers(collectionName, data) {
+async function getUsers(collectionName, data) {
   await client.connect();
   const db = client.db(databaseName);
   console.log(data);
@@ -18,4 +18,12 @@ async function getAllUsers(collectionName, data) {
   return await collection.find(data).toArray();
 }
 
-module.exports = { getAllUsers, insert };
+
+async function getAllUser(collectionName){
+  await client.connect();
+  const db = client.db(databaseName);
+  return collection = db.collection(collectionName);
+}
+
+
+module.exports = { getUsers, insert, getAllUser };
