@@ -1,4 +1,5 @@
 const { insert, getUsers, getAllUser } = require("../model/model");
+const mongodb = require('mongodb')
 
 exports.user = async (req, res) => {
   try {
@@ -81,9 +82,10 @@ exports.deleteUser = async (req, res) => {
     age = age.map((i) => i.id);
     const obj = {...age}
     console.log(obj,"=====>");
+    
     result = await (
       await getAllUser("userProfile")
-    ).deleteMany({obj});
+    ).deleteMany({_id: obj['0']});
     console.log(result, "===>");
 
     return res.status(200).json({
